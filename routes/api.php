@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIs\AuthController;
+use App\Http\Controllers\APIs\CityController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,3 +22,13 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('register', 'register');
 
 });
+
+// Route::group(['middleware'=>['jwt.auth']],function(){
+
+    Route::group(['prefix' => 'cities'], function () {
+        Route::get('/', [CityController::class, 'index']);
+    });
+
+
+
+// });
