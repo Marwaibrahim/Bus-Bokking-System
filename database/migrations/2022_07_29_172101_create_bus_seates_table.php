@@ -13,13 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cities', function (Blueprint $table) {
+        Schema::create('bus_seates', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->integer('seat_number');
+            $table->boolean('booked')->default(0);
+            $table->integer('bus_id')->unsigned();
+            $table->foreign('bus_id')->references('id')->on('buses')->onUpdate('cascade')->onDelete('cascade');
+            $table->index(['seat_number', 'bus_id']);
+
             $table->timestamps();
             $table->softDeletes();
         });
-
     }
 
     /**
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cities');
+        Schema::dropIfExists('bus_seates');
     }
 };
