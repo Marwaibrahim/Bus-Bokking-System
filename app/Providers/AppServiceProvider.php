@@ -18,6 +18,10 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\CityRepository'
         );
 
+        $this->app->bind(
+            'App\Contracts\TripContract',
+            'App\Repositories\TripRepository'
+        );
     }
 
     /**
